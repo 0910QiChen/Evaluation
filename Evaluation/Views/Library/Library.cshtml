@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Evaluation.Models.AuthorBookVM>
+@{
+    ViewBag.Title = "Library";
+}
+
+<h2>Library</h2>
+
+<p>
+    <button onclick="location.href='@Url.Action("AuthorCreate")'" class="btn btn-primary">Create New Author</button>
+</p>
+<p>
+    <button onclick="location.href='@Url.Action("BookCreate")'" class="btn btn-primary">Create New Book</button>
+</p>
+
+@using (Html.BeginForm("Library", "Library", FormMethod.Get))
+{
+    <p>
+        <b>Find by Title, Genre, Author Name or Author country:</b>
+        @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Book Title
+        </th>
+        <th>
+            Book Genre
+        </th>
+        <th>
+            Publish Date
+        </th>
+        <th>
+            Author ID
+        </th>
+        <th>
+            Author Name
+        </th>
+        <th>
+            Author Age
+        </th>
+        <th>
+            Author Country
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @item.PublishDate.ToString("yyyy/MM/dd")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("AuthorEdit", new { id = item.AuthorID })'" class="btn btn-secondary">Edit Author</button>
+                <button onclick="location.href='@Url.Action("AuthorDetails", new { id = item.AuthorID })'" class="btn btn-info">Author Details</button>
+                <button onclick="location.href='@Url.Action("AuthorDelete", new { id = item.AuthorID })'" class="btn btn-danger">Delete Author</button>
+                <button onclick="location.href='@Url.Action("BookEdit", new { id = item.BookID })'" class="btn btn-secondary">Edit Book</button>
+                <button onclick="location.href='@Url.Action("BookDetails", new { id = item.BookID })'" class="btn btn-info">Book Details</button>
+                <button onclick="location.href='@Url.Action("BookDelete", new { id = item.BookID })'" class="btn btn-danger">Delete Book</button>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Evaluation.Models.AuthorVM>
+
+@{
+    ViewBag.Title = "Authors";
+}
+
+<h2>Authors</h2>
+
+@if (TempData["NoAuthorID"] != null)
+{
+    <div id="noAuthorMessage" class="alert alert-warning">
+        @TempData["NoAuthorID"]
+    </div>
+}
+
+@if (TempData["NoAuthor"] != null)
+{
+    <div id="noAuthorMessage" class="alert alert-warning">
+        @TempData["NoAuthor"]
+    </div>
+}
+
+<p>
+    <button onclick="location.href='@Url.Action("AuthorCreate")'" class="btn btn-primary">Create New Author</button>
+</p>
+
+@using (Html.BeginForm("Authors", "Library", FormMethod.Get))
+{
+    <p>
+        <b>Find by Author Name or Author country:</b>
+        @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Author ID
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+            Country
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("AuthorEdit", new { id = item.AuthorID })'" class="btn btn-secondary">Edit Author</button>
+                <button onclick="location.href='@Url.Action("AuthorDetails", new { id = item.AuthorID })'" class="btn btn-info">Author Details</button>
+                <button onclick="location.href='@Url.Action("AuthorDelete", new { id = item.AuthorID })'" class="btn btn-danger">Delete Author</button>
+            </td>
+        </tr>
+    }
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var messageDiv = $('#noAuthorMessage');
+        if (messageDiv.text().trim().length > 0) {
+            messageDiv.show();
+            setTimeout(function () {
+                messageDiv.fadeOut('slow');
+            }, 5000);
+        }
+    });</script>

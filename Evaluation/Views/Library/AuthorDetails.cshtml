@@ -1,0 +1,43 @@
+﻿@model Evaluation.Models.AuthorVM
+
+@{
+    ViewBag.Title = "AuthorDetails";
+}
+
+<h2>Author Details</h2>
+
+<div>
+    <h4>Author</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+    </dl>
+</div>
+<p>
+    <button onclick="location.href='@Url.Action("AuthorEdit", new { id = Model.AuthorID })'" class="btn btn-secondary">Edit Author</button>
+</p>
+<p>
+    <button onclick="location.href='@Url.Action("Authors")'" class="btn btn-primary">Back To Authors</button>
+</p>
+<p>
+    <button onclick="location.href='@Url.Action("Library")'" class="btn btn-primary">Back To Library</button>
+</p>
