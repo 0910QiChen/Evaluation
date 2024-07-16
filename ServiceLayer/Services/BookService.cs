@@ -44,7 +44,7 @@ namespace ServiceLayer.Services
 
         public BookDTO findBook(int? id)
         {
-            var book = mapper.Map<BookDTO>(_unitOfWork.BookRepo.findBook(id));
+            var book = mapper.Map<BookDTO>(_unitOfWork.BookRepo.getByID(id));
             if (book == null)
             {
                 return null;
@@ -57,7 +57,7 @@ namespace ServiceLayer.Services
             var book = mapper.Map<Book>(bookDTO);
             if (book != null)
             {
-                _unitOfWork.BookRepo.editBook(book);
+                _unitOfWork.BookRepo.update(book);
                 _unitOfWork.commit();
             }
         }

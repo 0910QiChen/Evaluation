@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Interfaces;
+using DomainLayer.DomainModels;
 using RepositoryLayer.Contexts;
 using System;
 
@@ -8,6 +9,8 @@ namespace RepositoryLayer.Repositories
     {
         public readonly LibraryContext _context;
 
+        public IGenericRepo<Book> BookRepos { get; set; }
+        public IGenericRepo<Author> AuthorRepos { get; set; }
         public IAuthorRepo AuthorRepo { get; }
         public IBookRepo BookRepo { get; }
 
@@ -16,6 +19,8 @@ namespace RepositoryLayer.Repositories
             _context = context;
             AuthorRepo = new AuthorRepo(_context);
             BookRepo = new BookRepo(_context);
+            BookRepos = new GenericRepo<Book>(_context);
+            AuthorRepos = new GenericRepo<Author>(_context);
         }
 
         public void commit()

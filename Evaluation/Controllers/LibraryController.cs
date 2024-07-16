@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using AutoMapper;
-using DomainLayer.DomainModels;
-using Evaluation.Models;
+﻿using Evaluation.Models;
 using ServiceLayer.DTOs;
 using ServiceLayer.Interfaces;
 using ServiceLayer.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using AutoMapper;
 
 namespace Evaluation.Controllers
 {
@@ -52,6 +51,7 @@ namespace Evaluation.Controllers
                     var authorBookVM = new AuthorBookVM()
                     {
                         AuthorID = author.AuthorID,
+                        Name = author.Name,
                         Age = author.Age,
                         Country = author.Country,
                     };

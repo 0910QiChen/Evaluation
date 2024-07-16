@@ -15,7 +15,7 @@
 @using (Html.BeginForm("Library", "Library", FormMethod.Get))
 {
     <p>
-        <b>Find by Title, Genre, Author Name or Author country:</b>
+        <b>Find by Book Title, Book Genre, Author Name or Author country:</b>
         @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" class="btn btn-primary" />
     </p>

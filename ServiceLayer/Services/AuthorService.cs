@@ -52,7 +52,7 @@ namespace ServiceLayer.Services
 
         public AuthorDTO findAuthor(int? id)
         {
-            var author = mapper.Map<AuthorDTO>(_unitOfWork.AuthorRepo.findAuthor(id));
+            var author = mapper.Map<AuthorDTO>(_unitOfWork.AuthorRepo.getByID(id));
             if(author == null)
             {
                 return null;
@@ -65,7 +65,7 @@ namespace ServiceLayer.Services
             var author = mapper.Map<Author>(authorDTO);
             if(author != null)
             {
-                _unitOfWork.AuthorRepo.editAuthor(author);
+                _unitOfWork.AuthorRepo.update(author);
                 _unitOfWork.commit();
             }
         }
